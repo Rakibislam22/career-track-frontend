@@ -4,9 +4,8 @@ import {
     LayoutDashboard,
     ListChecks,
     PlusCircle,
-    LogOut,
-    Menu,
 } from "lucide-react";
+import DashboardNavbar from "../components/DashboardNavbar";
 
 export default function DashboardLayout() {
     const navigate = useNavigate();
@@ -31,31 +30,7 @@ export default function DashboardLayout() {
 
             <div className="drawer-content flex flex-col min-h-screen">
                 {/* ================= NAVBAR ================= */}
-                <nav className="navbar border-b border-white/10 bg-transparent backdrop-blur-md px-4 lg:px-8 sticky top-0 z-40">
-                    <div className="flex-1 flex items-center gap-3">
-                        <label
-                            htmlFor="dashboard-drawer"
-                            aria-label="open sidebar"
-                            className="btn btn-square btn-ghost btn-sm text-white hover:bg-white/10 lg:hidden"
-                        >
-                            <Menu className="h-5 w-5" />
-                        </label>
-                        <a href="/" className="flex items-center gap-2 font-semibold text-white">
-                            <KanbanSquare className="h-5 w-5 text-primary" />
-                            CareerTrack <span className="text-primary">Lite</span>
-                        </a>
-                    </div>
-                    <div className="flex items-center gap-3">
-                        <span className="text-sm text-white/60 hidden sm:block">{user?.name}</span>
-                        <button
-                            onClick={handleLogout}
-                            className="btn btn-ghost btn-sm text-white hover:bg-white/10 gap-2"
-                        >
-                            <LogOut className="h-4 w-4" />
-                            <span className="hidden sm:inline">Logout</span>
-                        </button>
-                    </div>
-                </nav>
+                <DashboardNavbar onLogout={handleLogout} user={user} />
 
                 {/* ================= NESTED ROUTE CONTENT ================= */}
                 <main className="flex-1 px-6 lg:px-10 py-8">
