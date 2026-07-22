@@ -6,6 +6,7 @@ import {
     ArrowRight,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
+import { Link } from "react-router";
 
 const previewApplications = [
     { company: "Vercel", title: "Frontend Engineer", status: "Interview" },
@@ -45,10 +46,10 @@ export default function LandingPage() {
                             focus on interviews, not spreadsheets.
                         </p>
                         <div className="flex flex-wrap gap-3">
-                            <a href="/register" className="btn btn-primary">
+                            <Link to="/register" className="btn btn-primary">
                                 Start tracking free
                                 <ArrowRight className="h-4 w-4" />
-                            </a>
+                            </Link>
                             <a href="#how-it-works" className="btn btn-outline border-white/20 text-white">
                                 See how it works
                             </a>
@@ -220,10 +221,10 @@ export default function LandingPage() {
                     <p className="text-white/60 mb-8">
                         Free to use. No credit card. Just a cleaner way to job hunt.
                     </p>
-                    <a href="/register" className="btn btn-primary btn-lg">
+                    <Link to="/register" className="btn btn-primary btn-lg">
                         Create your free account
                         <ArrowRight className="h-4 w-4" />
-                    </a>
+                    </Link>
                 </div>
             </section>
 
