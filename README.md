@@ -1,6 +1,6 @@
 # CareerTrack Lite — Frontend
 
-The React frontend for CareerTrack Lite, a job application tracking system. Connects to the [CareerTrack Lite backend API](../career-track-backend) to provide registration, login, a dashboard, and full CRUD for job applications.
+The React frontend for CareerTrack Lite, a job application tracking system. Connects to the [CareerTrack Lite backend API](https://github.com/Rakibislam22/career-track-backend) to provide registration, login, a dashboard, and full CRUD for job applications.
 
 ---
 
@@ -99,7 +99,7 @@ career-track-frontend/
 
 - Node.js v18 or higher
 - npm
-- The [backend API](../career-track-backend) running locally or deployed
+- The [backend API](https://github.com/Rakibislam22/career-track-backend) running locally or deployed
 
 ### Installation
 
@@ -202,11 +202,11 @@ CareerTrack Lite uses a dark theme inspired by GitHub's UI, implemented as a cus
 - **Frontend:** Deployed on [Vercel](https://vercel.com).
   - Framework preset: Vite
   - Environment variable: `VITE_API_URL` set to the deployed backend's `/api` URL
-- **Backend:** See the [backend README](../career-track-backend/README.md) for its Render deployment details.
+- **Backend:** See the [backend README](https://github.com/Rakibislam22/career-track-backend/README.md) for its Render deployment details.
 
 **Live Links**
 - Frontend: https://myjob-application.vercel.app/
-- Backend/API: <https://career-track-backend-n7i9.onrender.com/
+- Backend/API: https://career-track-backend-n7i9.onrender.com/
 
 ---
 
