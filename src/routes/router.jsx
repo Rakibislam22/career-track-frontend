@@ -5,6 +5,7 @@ import RegisterPage from "../pages/RegisterPage";
 import DashboardPage from "../pages/DashboardPage";
 import DashboardLayout from "../layouts/DashboardLayout";
 import ApplicationFormPage from "../pages/ApplicationFormPage";
+import ApplicationsPage from "../pages/ApplicationsPage";
 
 
 const router = createBrowserRouter([
@@ -28,9 +29,13 @@ const router = createBrowserRouter([
                 element: <DashboardPage></DashboardPage>
             },
             {
-                path: "applications/new",
+                path: "application/new",
                 element: <ApplicationFormPage></ApplicationFormPage>
             },
+            {
+                path: "applications",
+                element: <ApplicationsPage></ApplicationsPage>
+            }
             
         ],
     }

@@ -90,7 +90,7 @@ export default function DashboardLayout() {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/dashboard/applications/new" className={navLinkClass}>
+                            <NavLink to="/dashboard/application/new" className={navLinkClass}>
                                 <PlusCircle className="h-4 w-4" />
                                 Add Application
                             </NavLink>
