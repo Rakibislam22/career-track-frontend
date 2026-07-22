@@ -6,6 +6,7 @@ import DashboardPage from "../pages/DashboardPage";
 import DashboardLayout from "../layouts/DashboardLayout";
 import ApplicationFormPage from "../pages/ApplicationFormPage";
 import ApplicationsPage from "../pages/ApplicationsPage";
+import ApplicationDetailsPage from "../pages/ApplicationDetailsPage";
 
 
 const router = createBrowserRouter([
@@ -35,11 +36,15 @@ const router = createBrowserRouter([
             {
                 path: "applications",
                 element: <ApplicationsPage></ApplicationsPage>
+            },
+            {
+                path: "application/:id",
+                element: <ApplicationDetailsPage></ApplicationDetailsPage>
             }
-            
+
         ],
     }
-    
+
 ]);
 
 export default router;

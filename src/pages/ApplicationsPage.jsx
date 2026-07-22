@@ -154,7 +154,7 @@ export default function ApplicationsPage() {
                                         <td className="text-white/50 text-sm">{new Date(app.applicationDate).toLocaleDateString()}</td>
                                         <td>
                                             <div className="flex justify-end gap-2">
-                                                <Link to={`/dashboard/applications/${app.id}`} className="btn btn-ghost btn-xs text-white/60 hover:bg-white/10 hover:text-white">
+                                                <Link to={`/dashboard/application/${app.id}`} className="btn btn-ghost btn-xs text-white/60 hover:bg-white/10 hover:text-white">
                                                     <Eye className="h-3.5 w-3.5" />
                                                 </Link>
                                                 <button onClick={() => handleDelete(app.id, app.companyName)} className="btn btn-ghost btn-xs text-white/60 hover:bg-error/20 hover:text-error">
