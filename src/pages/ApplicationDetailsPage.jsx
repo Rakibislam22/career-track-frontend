@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
-import { ArrowLeft, Pencil, Trash2, ExternalLink, Loader2 } from "lucide-react";
+import { ArrowLeft, Pencil, Trash2, ExternalLink, Loader2, Sparkles } from "lucide-react";
 import Swal from "sweetalert2";
 import { apiRequest } from "../lib/apiClient";
 import { statusBadgeClass, statusLabel, sourceLabel, swalDarkTheme } from "../lib/constants";
@@ -12,6 +12,10 @@ export default function ApplicationDetailsPage() {
     const [application, setApplication] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
+
+    const [aiResearch, setAiResearch] = useState(null);
+    const [isResearching, setIsResearching] = useState(false);
+    const [researchError, setResearchError] = useState("");
 
     useEffect(() => {
         apiRequest(`/applications/${id}`)
@@ -44,6 +48,23 @@ export default function ApplicationDetailsPage() {
         }
     };
 
+    const handleAiResearch = async () => {
+        setIsResearching(true);
+        setResearchError("");
+        setAiResearch(null);
+        try {
+            const res = await apiRequest("/applications/research", {
+                method: "POST",
+                body: JSON.stringify({ companyName: application.companyName }),
+            });
+            setAiResearch(res.data);
+        } catch (err) {
+            setResearchError(err.message);
+        } finally {
+            setIsResearching(false);
+        }
+    };
+
     if (isLoading) {
         return (
             <div className="flex flex-col items-center justify-center py-24 text-white/50">
@@ -62,7 +83,7 @@ export default function ApplicationDetailsPage() {
     }
 
     return (
-        <div className="max-w-2xl">
+        <div className="max-w-2xl mx-auto">
             <Link to="/dashboard/applications" className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white mb-6 transition-colors">
                 <ArrowLeft className="h-4 w-4" />
                 Back to all applications
@@ -115,6 +136,42 @@ export default function ApplicationDetailsPage() {
                         Delete
                     </button>
                 </div>
+            </div>
+
+            <div className="glass-surface rounded-xl p-6 mt-6">
+                <div className="flex items-center gap-2 mb-4">
+                    <Sparkles className="h-5 w-5 text-primary" />
+                    <h2 className="text-lg font-semibold text-white">AI Assistant</h2>
+                </div>
+                {!aiResearch && !isResearching && !researchError && (
+                    <p className="text-sm text-white/50 mb-4">Get AI-powered insights about the company and potential interview questions.</p>
+                )}
+
+                {isResearching && (
+                    <div className="flex items-center gap-2 text-white/60 text-sm">
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        <span>Researching...</span>
+                    </div>
+                )}
+
+                {researchError && <div className="alert alert-error alert-soft text-sm"><span>{researchError}</span></div>}
+
+                {aiResearch && (
+                    <div className="flex flex-col gap-4 text-sm">
+                        <div>
+                            <h3 className="font-semibold text-white mb-1">Company Info</h3>
+                            <p className="text-white/70 whitespace-pre-wrap">{aiResearch.companyInfo}</p>
+                        </div>
+                        <div>
+                            <h3 className="font-semibold text-white mb-1">Related Questions</h3>
+                            <ul className="list-disc list-inside flex flex-col gap-2 text-white/70">
+                                {aiResearch.relatedQuestions.map((q, i) => <li key={i}>{q}</li>)}
+                            </ul>
+                        </div>
+                    </div>
+                )}
+
+                {!isResearching && <button onClick={handleAiResearch} className="btn btn-primary btn-sm mt-4 gap-2"><Sparkles className="h-4 w-4" /> Know about company by AI</button>}
             </div>
         </div>
     );
