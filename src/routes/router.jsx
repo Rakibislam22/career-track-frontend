@@ -2,6 +2,8 @@ import { createBrowserRouter } from "react-router";
 import LandingPage from "../pages/LandingPage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
+import DashboardPage from "../pages/DashboardPage";
+import DashboardLayout from "../layouts/DashboardLayout";
 
 
 const router = createBrowserRouter([
@@ -16,6 +18,17 @@ const router = createBrowserRouter([
         path: "register",
         element: <RegisterPage></RegisterPage>
     },
+    {
+        path: "/dashboard",
+        element: <DashboardLayout></DashboardLayout>,
+        children: [
+            {
+                path: "",
+                element: <DashboardPage></DashboardPage>
+            },
+            
+        ],
+    }
     
 ]);
 
