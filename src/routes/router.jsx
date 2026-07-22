@@ -8,6 +8,8 @@ import ApplicationFormPage from "../pages/ApplicationFormPage";
 import ApplicationsPage from "../pages/ApplicationsPage";
 import ApplicationDetailsPage from "../pages/ApplicationDetailsPage";
 import PrivateRoute from "./PrivateRoute";
+import { path } from "framer-motion/client";
+import NotFoundPage from "../pages/NotFoundPage";
 
 
 const router = createBrowserRouter([
@@ -48,6 +50,11 @@ const router = createBrowserRouter([
             }
 
         ],
+    },
+
+    {
+        path: "*",
+        element: <NotFoundPage />
     }
 
 ]);
