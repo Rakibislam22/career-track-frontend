@@ -1,1 +1,38 @@
 @import "tailwindcss";
+@plugin "daisyui" {
+  themes: github --default;
+}
+@plugin "daisyui/theme" {
+  name: "github";
+  default: true;
+  color-scheme: light;
+  --color-base-100: #ffffff;
+  --color-base-200: #f6f8fa;
+  --color-base-300: #d0d7de;
+  --color-base-content: #1f2328;
+  --color-primary: #238636;
+  --color-primary-content: #ffffff;
+  --color-secondary: #0969da;
+  --color-secondary-content: #ffffff;
+  --color-accent: #8250df;
+  --color-accent-content: #ffffff;
+  --color-neutral: #24292f;
+  --color-neutral-content: #f6f8fa;
+  --color-info: #0969da;
+  --color-info-content: #ffffff;
+  --color-success: #1a7f37;
+  --color-success-content: #ffffff;
+  --color-warning: #9a6700;
+  --color-warning-content: #ffffff;
+  --color-error: #cf222e;
+  --color-error-content: #ffffff;
+}
+
+.hero-gradient-bg {
+  background: linear-gradient(
+    180deg,
+    #081827 0%,
+    #171e29 45%,
+    #131416 100%
+  );
+}
