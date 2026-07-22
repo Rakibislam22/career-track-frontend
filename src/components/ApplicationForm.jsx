@@ -103,7 +103,7 @@ export default function ApplicationForm({ initialData, onSubmit, submitLabel }) 
                 />
             </div>
 
-            <button type="submit" disabled={isSubmitting} className="btn btn-primary w-full sm:w-fit mt-2">
+            <button type="submit" className="btn btn-primary w-full sm:w-fit mt-2">
                 {isSubmitting ? (
                     <>
                         <Loader2 className="h-4 w-4 animate-spin" />

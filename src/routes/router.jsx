@@ -7,6 +7,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import ApplicationFormPage from "../pages/ApplicationFormPage";
 import ApplicationsPage from "../pages/ApplicationsPage";
 import ApplicationDetailsPage from "../pages/ApplicationDetailsPage";
+import AiResearchPage from "../pages/AiResearchPage";
 import PrivateRoute from "./PrivateRoute";
 import { path } from "framer-motion/client";
 import NotFoundPage from "../pages/NotFoundPage";
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
             {
                 path: "application/:id",
                 element: <ApplicationDetailsPage></ApplicationDetailsPage>
+            },
+            {
+                path: "ai-research",
+                element: <AiResearchPage></AiResearchPage>
             },
             {
                 path: "application/:id/edit",

@@ -68,23 +68,23 @@ export default function ApplicationDetailsPage() {
     if (isLoading) {
         return (
             <div className="flex flex-col items-center justify-center py-24 text-white/50">
-                <Loader2 className="h-6 w-6 animate-spin mb-3" />
-                <p className="text-sm">Loading application...</p>
+                <Loader2 className="h-8 w-8 animate-spin mb-4" />
+                <p className="text-base">Loading application...</p>
             </div>
         );
     }
 
     if (error || !application) {
         return (
-            <div className="alert alert-error alert-soft text-sm max-w-2xl">
+            <div className="alert alert-error alert-soft text-base max-w-2xl">
                 <span>{error || "Application not found."}</span>
             </div>
         );
     }
 
     return (
-        <div className="max-w-2xl mx-auto">
-            <Link to="/dashboard/applications" className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white mb-6 transition-colors">
+        <div className="max-w-3xl mx-auto">
+            <Link to="/dashboard/applications" className="inline-flex items-center gap-2 text-base text-white/50 hover:text-white mb-6 transition-colors">
                 <ArrowLeft className="h-4 w-4" />
                 Back to all applications
             </Link>
@@ -92,15 +92,15 @@ export default function ApplicationDetailsPage() {
             <div className="glass-surface rounded-xl p-6">
                 <div className="flex items-start justify-between mb-6 flex-wrap gap-3">
                     <div>
-                        <h1 className="text-2xl font-bold text-white mb-1">{application.companyName}</h1>
-                        <p className="text-white/60">{application.jobTitle}</p>
+                        <h1 className="text-3xl font-bold text-white mb-1">{application.companyName}</h1>
+                        <p className="text-lg text-white/60">{application.jobTitle}</p>
                     </div>
                     <span className={`badge ${statusBadgeClass[application.status]} badge-lg`}>
                         {statusLabel[application.status]}
                     </span>
                 </div>
 
-                <div className="grid sm:grid-cols-2 gap-4 mb-6 text-sm">
+                <div className="grid sm:grid-cols-2 gap-6 mb-6 text-base">
                     <div>
                         <p className="text-white/40 mb-1">Source</p>
                         <p className="text-white">{sourceLabel[application.source]}</p>
@@ -121,17 +121,17 @@ export default function ApplicationDetailsPage() {
                     {application.notes && (
                         <div className="sm:col-span-2">
                             <p className="text-white/40 mb-1">Notes</p>
-                            <p className="text-white/80 whitespace-pre-wrap">{application.notes}</p>
+                            <p className="text-white/80 whitespace-pre-wrap text-base">{application.notes}</p>
                         </div>
                     )}
                 </div>
 
                 <div className="flex gap-3 pt-4 border-t border-white/10">
-                    <Link to={`/dashboard/application/${id}/edit`} className="btn btn-outline border-white/20 text-white hover:bg-white/10 gap-2 btn-sm">
+                    <Link to={`/dashboard/application/${id}/edit`} className="btn btn-outline border-white/20 text-white hover:bg-white/10 gap-2">
                         <Pencil className="h-4 w-4" />
                         Edit
                     </Link>
-                    <button onClick={handleDelete} className="btn btn-outline border-error/40 text-error hover:bg-error/10 gap-2 btn-sm">
+                    <button onClick={handleDelete} className="btn btn-outline border-error/40 text-error hover:bg-error/10 gap-2">
                         <Trash2 className="h-4 w-4" />
                         Delete
                     </button>
@@ -140,24 +140,24 @@ export default function ApplicationDetailsPage() {
 
             <div className="glass-surface rounded-xl p-6 mt-6">
                 <div className="flex items-center gap-2 mb-4">
-                    <Sparkles className="h-5 w-5 text-primary" />
-                    <h2 className="text-lg font-semibold text-white">AI Assistant</h2>
+                    <Sparkles className="h-6 w-6 text-primary" />
+                    <h2 className="text-xl font-semibold text-white">AI Assistant</h2>
                 </div>
                 {!aiResearch && !isResearching && !researchError && (
-                    <p className="text-sm text-white/50 mb-4">Get AI-powered insights about the company and potential interview questions.</p>
+                    <p className="text-base text-white/50 mb-4">Get AI-powered insights about the company and potential interview questions.</p>
                 )}
 
                 {isResearching && (
-                    <div className="flex items-center gap-2 text-white/60 text-sm">
+                    <div className="flex items-center gap-2 text-white/60 text-base">
                         <Loader2 className="h-4 w-4 animate-spin" />
                         <span>Researching...</span>
                     </div>
                 )}
 
-                {researchError && <div className="alert alert-error alert-soft text-sm"><span>{researchError}</span></div>}
+                {researchError && <div className="alert alert-error alert-soft text-base"><span>{researchError}</span></div>}
 
                 {aiResearch && (
-                    <div className="flex flex-col gap-4 text-sm">
+                    <div className="flex flex-col gap-4 text-base">
                         <div>
                             <h3 className="font-semibold text-white mb-1">Company Info</h3>
                             <p className="text-white/70 whitespace-pre-wrap">{aiResearch.companyInfo}</p>
@@ -171,7 +171,7 @@ export default function ApplicationDetailsPage() {
                     </div>
                 )}
 
-                {!isResearching && <button onClick={handleAiResearch} className="btn btn-primary btn-sm mt-4 gap-2"><Sparkles className="h-4 w-4" /> Know about company by AI</button>}
+                {!isResearching && <button onClick={handleAiResearch} className="btn btn-primary mt-4 gap-2"><Sparkles className="h-4 w-4" /> Know about company by AI</button>}
             </div>
         </div>
     );

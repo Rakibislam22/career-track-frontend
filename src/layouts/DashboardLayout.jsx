@@ -4,6 +4,7 @@ import {
     LayoutDashboard,
     ListChecks,
     PlusCircle,
+    Sparkles,
 } from "lucide-react";
 import DashboardNavbar from "../components/DashboardNavbar";
 
@@ -68,6 +69,12 @@ export default function DashboardLayout() {
                             <NavLink to="/dashboard/application/new" className={navLinkClass}>
                                 <PlusCircle className="h-4 w-4" />
                                 Add Application
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/dashboard/ai-research" className={navLinkClass}>
+                                <Sparkles className="h-4 w-4" />
+                                AI Research
                             </NavLink>
                         </li>
                     </ul>
