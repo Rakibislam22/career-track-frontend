@@ -1,8 +1,19 @@
 import { KanbanSquare } from "lucide-react";
-import { Link } from "react-router";
+import { useEffect } from "react";
+import { Link, useLocation } from "react-router";
 
 // Shared shell for auth pages — keeps the glass card + logo consistent
 export default function AuthLayout({ title, subtitle, children }) {
+
+  const location = useLocation();
+  
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+  if(token){
+    window.location.href = "/dashboard";
+  }
+  }, [location]);
+
   return (
     <div className="min-h-screen flex items-center justify-center px-6 py-12">
       <div className="w-full max-w-md">

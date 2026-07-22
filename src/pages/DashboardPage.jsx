@@ -128,7 +128,7 @@ export default function DashboardPage() {
                                     {stats.recentApplications.map((app) => (
                                         <Link
                                             key={app.id}
-                                            to={`/dashboard/applications/${app.id}`}
+                                            to={`/dashboard/application/${app.id}`}
                                             className="flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 hover:bg-white/10 hover:border-white/20 transition-colors"
                                         >
                                             <div>

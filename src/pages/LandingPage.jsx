@@ -25,12 +25,12 @@ const statusBadgeClass = {
 
 export default function LandingPage() {
     return (
-        <div className="min-h-screen text-white">
+        <div className="w-11/12 mx-auto min-h-screen text-white">
             <Navbar />
 
             {/* ================= HERO ================= */}
             <section className="relative px-6 lg:px-16 pt-20 pb-24">
-                <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+                <div className=" mx-auto grid lg:grid-cols-2 gap-16 items-center">
                     <div>
                         <div className="badge badge-outline badge-lg mb-6 gap-2 py-4 border-white/20 text-white/80">
                             Built for the modern job hunt
@@ -98,7 +98,7 @@ export default function LandingPage() {
 
             {/* ================= FEATURES ================= */}
             <section id="features" className="px-6 lg:px-16 py-24">
-                <div className="max-w-6xl mx-auto">
+                <div className=" mx-auto">
                     <div className="max-w-xl mb-14">
                         <h2 className="text-3xl font-bold tracking-tight mb-3">
                             Everything the job hunt actually needs
@@ -149,7 +149,7 @@ export default function LandingPage() {
 
             {/* ================= HOW IT WORKS ================= */}
             <section id="how-it-works" className="px-6 lg:px-16 py-24">
-                <div className="max-w-6xl mx-auto">
+                <div className=" mx-auto">
                     <h2 className="text-3xl font-bold tracking-tight mb-14 text-center">
                         Three steps. Zero friction.
                     </h2>
@@ -188,7 +188,7 @@ export default function LandingPage() {
 
             {/* ================= PIPELINE SHOWCASE ================= */}
             <section id="pipeline" className="px-6 lg:px-16 py-24 border-t border-white/10">
-                <div className="max-w-6xl mx-auto text-center">
+                <div className=" mx-auto text-center">
                     <h2 className="text-3xl font-bold tracking-tight mb-3">
                         Follow every stage of your pipeline
                     </h2>
@@ -231,11 +231,24 @@ export default function LandingPage() {
             {/* ================= FOOTER ================= */}
             <footer className="footer footer-center px-6 py-10 border-t border-white/10 text-white/50">
                 <div>
-                    <div className="flex items-center gap-2 font-semibold text-white mb-1">
-                        <KanbanSquare className="h-4 w-4 text-primary" />
-                        CareerTrack Lite
+                    <div className="flex text-xl items-center justify-center gap-2 font-semibold text-white mb-2">
+                        <KanbanSquare className="h-5 w-5 text-primary" />
+                        CareerTrack <span className="text-primary">Lite</span>
                     </div>
-                    <p className="text-xs">Built as a full-stack project — CareerTrack Lite © 2026</p>
+
+                    <p className="text-md">
+                        Crafted by <a href="https://mdrakibali.me" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary">Md Rakib Ali</a>
+                    </p>
+
+                    <p className="text-sm text-white/40 mt-1">
+                        Track applications • Stay organized • Land your dream job 
+                    </p>
+
+                    <div className="mt-4 h-px w-24 bg-white/10"></div>
+
+                    <p className="text-sm text-white/30 mt-4">
+                        © 2026 CareerTrack Lite • Designed & Developed with passion.
+                    </p>
                 </div>
             </footer>
         </div>

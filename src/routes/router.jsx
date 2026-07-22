@@ -41,6 +41,10 @@ const router = createBrowserRouter([
             {
                 path: "application/:id",
                 element: <ApplicationDetailsPage></ApplicationDetailsPage>
+            },
+            {
+                path: "application/:id/edit",
+                element: <ApplicationFormPage></ApplicationFormPage>
             }
 
         ],

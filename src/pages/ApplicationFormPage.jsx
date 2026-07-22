@@ -28,13 +28,13 @@ export default function ApplicationFormPage() {
                 method: "PATCH",
                 body: JSON.stringify(formData),
             });
-            navigate(`/dashboard/applications/${id}`);
+            navigate(`/dashboard/application/${id}`);
         } else {
             const data = await apiRequest("/applications", {
                 method: "POST",
                 body: JSON.stringify(formData),
             });
-            navigate(`/dashboard/applications/${data.application.id}`);
+            navigate(`/dashboard/application/${data.application.id}`);
         }
     };
 

@@ -106,7 +106,7 @@ export default function ApplicationDetailsPage() {
                 </div>
 
                 <div className="flex gap-3 pt-4 border-t border-white/10">
-                    <Link to={`/dashboard/applications/${id}/edit`} className="btn btn-outline border-white/20 text-white hover:bg-white/10 gap-2 btn-sm">
+                    <Link to={`/dashboard/application/${id}/edit`} className="btn btn-outline border-white/20 text-white hover:bg-white/10 gap-2 btn-sm">
                         <Pencil className="h-4 w-4" />
                         Edit
                     </Link>
