@@ -9,7 +9,6 @@ import ApplicationsPage from "../pages/ApplicationsPage";
 import ApplicationDetailsPage from "../pages/ApplicationDetailsPage";
 import AiResearchPage from "../pages/AiResearchPage";
 import PrivateRoute from "./PrivateRoute";
-import { path } from "framer-motion/client";
 import NotFoundPage from "../pages/NotFoundPage";
 
 
