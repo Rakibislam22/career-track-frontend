@@ -4,6 +4,7 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import DashboardPage from "../pages/DashboardPage";
 import DashboardLayout from "../layouts/DashboardLayout";
+import ApplicationFormPage from "../pages/ApplicationFormPage";
 
 
 const router = createBrowserRouter([
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
             {
                 path: "",
                 element: <DashboardPage></DashboardPage>
+            },
+            {
+                path: "applications/new",
+                element: <ApplicationFormPage></ApplicationFormPage>
             },
             
         ],
