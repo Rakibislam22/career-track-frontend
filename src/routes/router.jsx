@@ -7,6 +7,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import ApplicationFormPage from "../pages/ApplicationFormPage";
 import ApplicationsPage from "../pages/ApplicationsPage";
 import ApplicationDetailsPage from "../pages/ApplicationDetailsPage";
+import PrivateRoute from "./PrivateRoute";
 
 
 const router = createBrowserRouter([
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/dashboard",
-        element: <DashboardLayout></DashboardLayout>,
+        element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children: [
             {
                 path: "",
