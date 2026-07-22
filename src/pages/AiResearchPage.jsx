@@ -49,7 +49,7 @@ export default function AiResearchPage() {
                     className="input flex-1 bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-primary"
                     disabled={isResearching}
                 />
-                <button type="submit" disabled={isResearching || !companyName.trim()} className="btn btn-primary gap-2">
+                <button type="submit"  className="btn btn-primary gap-2">
                     {isResearching ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
                     <span>{isResearching ? "Researching..." : "Research Company"}</span>
                 </button>
