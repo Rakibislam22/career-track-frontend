@@ -93,7 +93,6 @@ export default function LoginPage() {
 
                 <button
                     type="submit"
-                    disabled={isSubmitting}
                     className="btn btn-primary w-full mt-3 min-h-[44px] shadow-lg shadow-primary/25 hover:shadow-primary/40 active:scale-[0.98] transition-all disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                     {isSubmitting ? (
