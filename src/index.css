@@ -40,6 +40,10 @@
   --noise: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: linear-gradient(180deg, #081827 0%, #171e29 45%, #131416 100%);
   background-attachment: fixed;
