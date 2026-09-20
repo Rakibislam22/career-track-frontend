@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
-import { Loader2, Eye, EyeOff } from "lucide-react";
+import { useState } from "react";
+import { Loader2, AlertCircle } from "lucide-react";
 import { apiRequest } from "../lib/apiClient";
 import AuthLayout from "../layouts/AuthLayout";
 import { Link } from "react-router";
 import ColdStartNotice from "../components/ColdStartNotice";
+import AuthInput from "../components/AuthInput";
 
 export default function RegisterPage() {
     const [formData, setFormData] = useState({
@@ -11,13 +12,13 @@ export default function RegisterPage() {
         email: "",
         password: "",
     });
-    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showColdStart, setShowColdStart] = useState(false);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+        if (error) setError("");
     };
 
     const handleSubmit = async (e) => {
@@ -26,7 +27,7 @@ export default function RegisterPage() {
 
         // Client-side validation — mirrors backend's minimums (Zod: name 2+, password 6+)
         if (formData.name.trim().length < 2) {
-            setError("Name must be at least 2 characters.");
+            setError("Full name must be at least 2 characters.");
             return;
         }
         if (formData.password.length < 6) {
@@ -37,9 +38,8 @@ export default function RegisterPage() {
         setIsSubmitting(true);
 
         const coldStartTimer = setTimeout(() => setShowColdStart(true), 3000);
-
-        // Clear notice if request is fast
         const cleanup = () => clearTimeout(coldStartTimer);
+
         try {
             const data = await apiRequest("/auth/register", {
                 method: "POST",
@@ -51,7 +51,7 @@ export default function RegisterPage() {
 
             window.location.href = "/dashboard";
         } catch (err) {
-            setError(err.message);
+            setError(err.message || "Failed to create account. Please try again.");
             cleanup();
         } finally {
             setIsSubmitting(false);
@@ -62,73 +62,72 @@ export default function RegisterPage() {
     return (
         <AuthLayout
             title="Create your account"
-            subtitle="Start tracking your job applications in one place."
+            subtitle="Start tracking all your job applications in one organized place."
         >
             {showColdStart && <ColdStartNotice />}
+
             {error && (
-                <div className="alert alert-error alert-soft mb-4 text-sm py-2">
+                <div
+                    className="alert alert-error alert-soft mb-5 text-sm py-2.5 px-4 flex items-center gap-2 rounded-lg border border-error/30"
+                    role="alert"
+                    aria-live="polite"
+                >
+                    <AlertCircle className="h-4 w-4 shrink-0 text-error" aria-hidden="true" />
                     <span>{error}</span>
                 </div>
             )}
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                <div>
-                    <label className="text-sm text-white/70 mb-1 block">Full name</label>
-                    <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        placeholder="Rakib Hasan"
-                        className="input w-full bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-primary"
-                    />
-                </div>
+                <AuthInput
+                    id="register-name"
+                    label="Full name"
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    placeholder="e.g. Alex Johnson"
+                    autoComplete="name"
+                    disabled={isSubmitting}
+                />
 
-                <div>
-                    <label className="text-sm text-white/70 mb-1 block">Email</label>
-                    <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        placeholder="you@example.com"
-                        className="input w-full bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-primary"
-                    />
-                </div>
+                <AuthInput
+                    id="register-email"
+                    label="Email address"
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    placeholder="you@example.com"
+                    autoComplete="email"
+                    inputMode="email"
+                    autoCapitalize="none"
+                    disabled={isSubmitting}
+                />
 
-                <div>
-                    <label className="text-sm text-white/70 mb-1 block">Password</label>
-                    <div className="relative">
-                        <input
-                            type={showPassword ? "text" : "password"}
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            required
-                            minLength={6}
-                            placeholder="At least 6 characters"
-                            className="input w-full bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-primary pr-10"
-                        />
-                        <button
-                            type="button"
-                            onClick={() => setShowPassword(!showPassword)}
-                            className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white/70"
-                        >
-                            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                        </button>
-                    </div>
-                </div>
+                <AuthInput
+                    id="register-password"
+                    label="Password"
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                    minLength={6}
+                    placeholder="At least 6 characters"
+                    autoComplete="new-password"
+                    disabled={isSubmitting}
+                />
 
                 <button
                     type="submit"
-                    
-                    className="btn btn-primary w-full mt-2"
+                    disabled={isSubmitting}
+                    className="btn btn-primary w-full mt-3 min-h-[44px] shadow-lg shadow-primary/25 hover:shadow-primary/40 active:scale-[0.98] transition-all disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                     {isSubmitting ? (
                         <span className="flex items-center justify-center gap-2">
-                            <Loader2 className="h-4 w-4 animate-spin" />
+                            <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
                             Creating account...
                         </span>
                     ) : (
@@ -137,12 +136,17 @@ export default function RegisterPage() {
                 </button>
             </form>
 
-            <p className="text-sm text-white/50 text-center mt-6">
-                Already have an account?{" "}
-                <Link to="/login" className="text-primary hover:underline">
-                    Sign in
-                </Link>
-            </p>
+            <div className="pt-6 mt-6 border-t border-white/10 text-center">
+                <p className="text-sm text-white/70">
+                    Already have an account?{" "}
+                    <Link
+                        to="/login"
+                        className="font-semibold text-primary hover:underline focus-visible:ring-2 focus-visible:ring-primary rounded px-1 py-0.5"
+                    >
+                        Sign in
+                    </Link>
+                </p>
+            </div>
         </AuthLayout>
     );
 }
