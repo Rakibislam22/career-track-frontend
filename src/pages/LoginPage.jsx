@@ -1,19 +1,20 @@
-import { useEffect, useState } from "react";
-import { Loader2, Eye, EyeOff } from "lucide-react";
+import { useState } from "react";
+import { Loader2, AlertCircle } from "lucide-react";
 import { apiRequest } from "../lib/apiClient";
 import AuthLayout from "../layouts/AuthLayout";
 import { Link } from "react-router";
 import ColdStartNotice from "../components/ColdStartNotice";
+import AuthInput from "../components/AuthInput";
 
 export default function LoginPage() {
     const [formData, setFormData] = useState({ email: "", password: "" });
-    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showColdStart, setShowColdStart] = useState(false);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+        if (error) setError("");
     };
 
     const handleSubmit = async (e) => {
@@ -22,8 +23,6 @@ export default function LoginPage() {
         setIsSubmitting(true);
 
         const coldStartTimer = setTimeout(() => setShowColdStart(true), 3000);
-
-        // Clear notice if request is fast
         const cleanup = () => clearTimeout(coldStartTimer);
 
         try {
@@ -32,13 +31,12 @@ export default function LoginPage() {
                 body: JSON.stringify(formData),
             });
 
-            // Store token + user — replace with your context/reducer dispatch if using one
             localStorage.setItem("token", data.token);
             localStorage.setItem("user", JSON.stringify(data.user));
 
             window.location.href = "/dashboard";
         } catch (err) {
-            setError(err.message);
+            setError(err.message || "Failed to sign in. Please verify your credentials.");
             cleanup();
         } finally {
             setIsSubmitting(false);
@@ -49,55 +47,54 @@ export default function LoginPage() {
     return (
         <AuthLayout
             title="Welcome back"
-            subtitle="Sign in to keep tracking your applications."
+            subtitle="Sign in to continue tracking your job search pipeline."
         >
             {showColdStart && <ColdStartNotice />}
+
             {error && (
-                <div className="alert alert-error alert-soft mb-4 text-sm py-2">
+                <div
+                    className="alert alert-error alert-soft mb-5 text-sm py-2.5 px-4 flex items-center gap-2 rounded-lg border border-error/30"
+                    role="alert"
+                    aria-live="polite"
+                >
+                    <AlertCircle className="h-4 w-4 shrink-0 text-error" aria-hidden="true" />
                     <span>{error}</span>
                 </div>
             )}
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                <div>
-                    <label className="text-sm text-white/70 mb-1 block">Email</label>
-                    <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        placeholder="you@example.com"
-                        className="input w-full bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-primary"
-                    />
-                </div>
+                <AuthInput
+                    id="login-email"
+                    label="Email address"
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    placeholder="you@example.com"
+                    autoComplete="email"
+                    inputMode="email"
+                    autoCapitalize="none"
+                    disabled={isSubmitting}
+                />
 
-                <div>
-                    <label className="text-sm text-white/70 mb-1 block">Password</label>
-                    <div className="relative">
-                        <input
-                            type={showPassword ? "text" : "password"}
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            required
-                            placeholder="••••••••"
-                            className="input w-full bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-primary pr-10"
-                        />
-                        <button
-                            type="button"
-                            onClick={() => setShowPassword(!showPassword)}
-                            className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white/70"
-                        >
-                            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                        </button>
-                    </div>
-                </div>
+                <AuthInput
+                    id="login-password"
+                    label="Password"
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                    placeholder="••••••••"
+                    autoComplete="current-password"
+                    disabled={isSubmitting}
+                />
 
                 <button
                     type="submit"
-                    
-                    className="btn btn-primary w-full mt-2"
+                    disabled={isSubmitting}
+                    className="btn btn-primary w-full mt-3 min-h-[44px] shadow-lg shadow-primary/25 hover:shadow-primary/40 active:scale-[0.98] transition-all disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                     {isSubmitting ? (
                         <span className="flex items-center justify-center gap-2">
@@ -110,12 +107,17 @@ export default function LoginPage() {
                 </button>
             </form>
 
-            <p className="text-sm text-white/50 text-center mt-6">
-                Don't have an account?{" "}
-                <Link to="/register" className="text-primary hover:underline">
-                    Create one
-                </Link>
-            </p>
+            <div className="pt-6 mt-6 border-t border-white/10 text-center">
+                <p className="text-sm text-white/70">
+                    Don&apos;t have an account yet?{" "}
+                    <Link
+                        to="/register"
+                        className="font-semibold text-primary hover:underline focus-visible:ring-2 focus-visible:ring-primary rounded px-1 py-0.5"
+                    >
+                        Create one free
+                    </Link>
+                </p>
+            </div>
         </AuthLayout>
     );
 }
